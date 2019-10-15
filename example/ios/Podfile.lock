@@ -1,0 +1,29 @@
+PODS:
+  - Flutter (1.0.0)
+  - JPVideoPlayer (3.1.1)
+  - mini_video_player (0.0.1):
+    - Flutter
+    - JPVideoPlayer
+
+DEPENDENCIES:
+  - Flutter (from `.symlinks/flutter/ios`)
+  - mini_video_player (from `.symlinks/plugins/mini_video_player/ios`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - JPVideoPlayer
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  mini_video_player:
+    :path: ".symlinks/plugins/mini_video_player/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  JPVideoPlayer: 234c2fc5c9dfd67b969a5dd8233815eb872472c6
+  mini_video_player: 846723c6b3c5681057f74cb2c2aee533a95ce106
+
+PODFILE CHECKSUM: 64b2109b760ac9073c864e2a8278e6464efaa219
+
+COCOAPODS: 1.6.1

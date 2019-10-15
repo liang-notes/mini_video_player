@@ -1,0 +1,36 @@
+package liang.com.mini_video_player;
+
+import io.flutter.plugin.common.MethodCall;
+import io.flutter.plugin.common.MethodChannel;
+import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
+import io.flutter.plugin.common.MethodChannel.Result;
+import io.flutter.plugin.common.PluginRegistry.Registrar;
+
+/**
+ * MiniVideoPlayerPlugin
+ */
+public class MiniVideoPlayerPlugin implements MethodCallHandler {
+    /**
+     * Plugin registration.
+     */
+//    public static void registerWith(Registrar registrar) {
+//        final MethodChannel channel = new MethodChannel(registrar.messenger(), "mini_video_player");
+//        final MethodChannel channel1 = new MethodChannel(registrar.platformViewRegistry().registerViewFactory('plugins.mini_video_player/view', new VideoViewFactory(registrar)));
+//        channel.setMethodCallHandler(new MiniVideoPlayerPlugin());
+//    }
+
+    public static void registerWith(Registrar registrar) {
+        registrar.platformViewRegistry()
+                .registerViewFactory("plugins.mini_video_player/view", new VideoViewFactory(registrar));
+    }
+
+
+    @Override
+    public void onMethodCall(MethodCall call, Result result) {
+        if (call.method.equals("getPlatformVersion")) {
+            result.success("Android " + android.os.Build.VERSION.RELEASE);
+        } else {
+            result.notImplemented();
+        }
+    }
+}
