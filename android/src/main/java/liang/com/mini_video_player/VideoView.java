@@ -37,6 +37,15 @@ public class VideoView implements PlatformView, MethodChannel.MethodCallHandler 
                 String url = methodCall.arguments.toString();
                 jzvdStd.setUp(url, "", SCREEN_NORMAL);
                 break;
+            case "resume":
+                jzvdStd.mediaInterface.start();
+                break;
+            case "pause":
+                jzvdStd.mediaInterface.pause();
+                break;
+            case "dealloc":
+                jzvdStd.mediaInterface.release();
+                break;
             default:
                 result.notImplemented();
         }
@@ -51,4 +60,5 @@ public class VideoView implements PlatformView, MethodChannel.MethodCallHandler 
         JzvdStd view = (JzvdStd) LayoutInflater.from(registrar.activity()).inflate(R.layout.jz_video, null);
         return view;
     }
+
 }

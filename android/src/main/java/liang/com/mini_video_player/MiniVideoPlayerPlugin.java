@@ -13,12 +13,6 @@ public class MiniVideoPlayerPlugin implements MethodCallHandler {
     /**
      * Plugin registration.
      */
-//    public static void registerWith(Registrar registrar) {
-//        final MethodChannel channel = new MethodChannel(registrar.messenger(), "mini_video_player");
-//        final MethodChannel channel1 = new MethodChannel(registrar.platformViewRegistry().registerViewFactory('plugins.mini_video_player/view', new VideoViewFactory(registrar)));
-//        channel.setMethodCallHandler(new MiniVideoPlayerPlugin());
-//    }
-
     public static void registerWith(Registrar registrar) {
         registrar.platformViewRegistry()
                 .registerViewFactory("plugins.mini_video_player/view", new VideoViewFactory(registrar));

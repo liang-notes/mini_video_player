@@ -18,6 +18,19 @@ class MiniVideoPlayerController {
     assert(url != null);
     return _channel.invokeMethod('loadUrl', url);
   }
+
+  Future<void> resume() async {
+    return _channel.invokeMethod('resume');
+  }
+
+  Future<void> pause() async {
+    return _channel.invokeMethod('pause');
+  }
+
+  Future<void> dealloc() async {
+    return _channel.invokeMethod('dealloc');
+  }
+
 }
 
 class MiniVideoPlayer extends StatefulWidget {

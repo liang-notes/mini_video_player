@@ -26,7 +26,7 @@
     if ([super init]) {
         _viewId = viewId;
         _videoView = [UIView new];
-        _videoView.backgroundColor = [UIColor greenColor];
+        _videoView.backgroundColor = [UIColor blackColor];
         NSDictionary *dic = args;
         CGFloat x = [dic[@"x"] floatValue];
         CGFloat y = [dic[@"y"] floatValue];
@@ -40,7 +40,6 @@
         [_channel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
             [weakSelf onMethodCall:call result:result];
         }];
-        
     }
     return self;
 }
@@ -52,7 +51,20 @@
 - (void)onMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     if ([[call method] isEqualToString:@"loadUrl"]) {
         [self onLoadUrl:call result:result];
-    } else {
+    }
+    else if ([[call method] isEqualToString:@"resume"]) {
+        [_videoView jp_resume];
+        result(nil);
+    }
+    else if ([[call method] isEqualToString:@"pause"]) {
+        [_videoView jp_pause];
+        result(nil);
+    }
+    else if ([[call method] isEqualToString:@"dealloc"]) {
+        [_videoView jp_stopPlay];
+        result(nil);
+    }
+    else {
         result(FlutterMethodNotImplemented);
     }
 }
