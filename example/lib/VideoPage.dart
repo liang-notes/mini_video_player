@@ -24,15 +24,12 @@ class _VideoPageState extends State<VideoPage> {
 
   @override
   Widget build(BuildContext context) {
-    var x = 0.0;
-    var y = 0.0;
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height-200;
 
     MiniVideoPlayer videoPlayer = new MiniVideoPlayer(
         onCreated: onViewPlayerCreated,
-        x: x,
-        y: y,
+        hiddenControlView: false,
         width: width,
         height: height);
 

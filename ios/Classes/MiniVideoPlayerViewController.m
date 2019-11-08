@@ -15,6 +15,7 @@
 @implementation MiniVideoPlayerViewController {
     UIView * _videoView;
     int64_t _viewId;
+    BOOL _hiddenControlView;
     FlutterMethodChannel* _channel;
 }
 
@@ -32,6 +33,7 @@
         CGFloat y = [dic[@"y"] floatValue];
         CGFloat width = [dic[@"width"] floatValue];
         CGFloat height = [dic[@"height"] floatValue];
+        _hiddenControlView = [dic[@"hiddenControlView"] boolValue];
         _videoView.frame = CGRectMake(x, y, width, height);
         _videoView.jp_videoPlayerDelegate = self;
         NSString* channelName = [NSString stringWithFormat:@"mini_video_player_%lld", viewId];
@@ -85,14 +87,18 @@
     if (!nsUrl) {
         return false;
     }
-    
-    [_videoView jp_playVideoWithURL:nsUrl
-                 bufferingIndicator:nil
-                        controlView:nil
-                       progressView:nil
-                      configuration:^(UIView *view, JPVideoPlayerModel *playerModel) {
-                          // self.muteSwitch.on = ![self.videoContainer jp_muted];
-                      }];
+    if (_hiddenControlView) {
+        [_videoView jp_playVideoMuteWithURL:nsUrl bufferingIndicator:nil progressView:nil configuration:nil];
+    } else {
+        [_videoView jp_playVideoWithURL:nsUrl
+                     bufferingIndicator:nil
+                            controlView:nil
+                           progressView:nil
+                          configuration:^(UIView *view, JPVideoPlayerModel *playerModel) {
+                              // self.muteSwitch.on = ![self.videoContainer jp_muted];
+                          }];
+
+    }
     return true;
 }
 

@@ -4,7 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import java.util.Map;
+
 import cn.jzvd.JzvdStd;
+import io.flutter.Log;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.PluginRegistry;
@@ -35,13 +38,18 @@ public class VideoView implements PlatformView, MethodChannel.MethodCallHandler 
         switch (methodCall.method) {
             case "loadUrl":
                 String url = methodCall.arguments.toString();
+                Log.e("url",url);
                 jzvdStd.setUp(url, "", SCREEN_NORMAL);
                 break;
             case "resume":
-                jzvdStd.mediaInterface.start();
+                if (!jzvdStd.mediaInterface.isPlaying()) {
+                    jzvdStd.mediaInterface.start();
+                }
                 break;
             case "pause":
-                jzvdStd.mediaInterface.pause();
+                if (jzvdStd.mediaInterface.isPlaying()) {
+                    jzvdStd.mediaInterface.pause();
+                }
                 break;
             case "dealloc":
                 jzvdStd.mediaInterface.release();
@@ -58,6 +66,15 @@ public class VideoView implements PlatformView, MethodChannel.MethodCallHandler 
 
     private JzvdStd getJzvdStd(PluginRegistry.Registrar registrar, Object args) {
         JzvdStd view = (JzvdStd) LayoutInflater.from(registrar.activity()).inflate(R.layout.jz_video, null);
+        Map<String,Object> data = (Map<String,Object>)args;
+        Boolean hiddenControlView = (Boolean)data.get("hiddenControlView");
+        if (hiddenControlView) {
+            view.startButton.setVisibility(INVISIBLE);
+            view.fullscreenButton.setVisibility(INVISIBLE);
+            view.progressBar.setVisibility(INVISIBLE);
+            view.currentTimeTextView.setVisibility(INVISIBLE);
+            view.totalTimeTextView.setVisibility(INVISIBLE);
+        }
         return view;
     }
 

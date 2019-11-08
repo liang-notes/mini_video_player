@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
-typedef void MiniVideoPlayerCreatedCallBack(MiniVideoPlayerController controller);
+typedef void MiniVideoPlayerCreatedCallBack(
+    MiniVideoPlayerController controller);
 
 class MiniVideoPlayerController {
   MethodChannel _channel;
@@ -30,28 +30,28 @@ class MiniVideoPlayerController {
   Future<void> dealloc() async {
     return _channel.invokeMethod('dealloc');
   }
-
 }
 
 class MiniVideoPlayer extends StatefulWidget {
-
   final MiniVideoPlayerCreatedCallBack onCreated;
-  final x;
-  final y;
-  final width;
-  final height;
+  final double x;
+  final double y;
+  final double width;
+  final double height;
+  final bool hiddenControlView;
 
   MiniVideoPlayer(
       {Key key,
-        @required this.onCreated,
-        @required this.x,
-        @required this.y,
-        @required this.width,
-        @required this.height});
+      @required this.onCreated,
+      @required this.width,
+      @required this.height,
+      this.x = 0,
+      this.y = 0,
+      this.hiddenControlView = false})
+      : super(key: key);
 
   @override
   _MiniVideoPlayerState createState() => _MiniVideoPlayerState();
-
 }
 
 class _MiniVideoPlayerState extends State<MiniVideoPlayer> {
@@ -81,7 +81,8 @@ class _MiniVideoPlayerState extends State<MiniVideoPlayer> {
           'x': widget.x,
           'y': widget.y,
           'width': widget.width,
-          'height': widget.height
+          'height': widget.height,
+          'hiddenControlView': widget.hiddenControlView
         },
         creationParamsCodec: const StandardMessageCodec(),
       );
@@ -93,7 +94,8 @@ class _MiniVideoPlayerState extends State<MiniVideoPlayer> {
           'x': widget.x,
           'y': widget.y,
           'width': widget.width,
-          'height': widget.height
+          'height': widget.height,
+          'hiddenControlView': widget.hiddenControlView
         },
         creationParamsCodec: const StandardMessageCodec(),
       );
@@ -105,5 +107,4 @@ class _MiniVideoPlayerState extends State<MiniVideoPlayer> {
       widget.onCreated(new MiniVideoPlayerController.init(id));
     }
   }
-
 }
