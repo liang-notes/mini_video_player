@@ -1,8 +1,8 @@
 name: mini_video_player
-description: A new Flutter plugin.
-version: 0.0.1
+description: A mini video player Flutter plugin for Android and iOS.
+version: 0.0.2
 author: wangliang<283175161@qq.com>
-homepage: https://github.com/WL2012
+homepage: https://github.com/WL2012/mini_video_player
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

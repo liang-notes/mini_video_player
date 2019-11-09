@@ -88,7 +88,7 @@
         return false;
     }
     if (_hiddenControlView) {
-        [_videoView jp_playVideoMuteWithURL:nsUrl bufferingIndicator:nil progressView:nil configuration:nil];
+        [_videoView jp_playVideoWithURL:nsUrl];
     } else {
         [_videoView jp_playVideoWithURL:nsUrl
                      bufferingIndicator:nil

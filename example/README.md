@@ -2,6 +2,7 @@
 
 Demonstrates how to use the mini_video_player plugin.
 
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

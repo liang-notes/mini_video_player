@@ -29,7 +29,7 @@ class _VideoPageState extends State<VideoPage> {
 
     MiniVideoPlayer videoPlayer = new MiniVideoPlayer(
         onCreated: onViewPlayerCreated,
-        hiddenControlView: false,
+        hiddenControlView: true,
         width: width,
         height: height);
 
